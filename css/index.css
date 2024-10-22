@@ -1,0 +1,19 @@
+#Grafico {
+   width: 100%;
+   height: 500px;
+   
+  }
+
+  .contenedor_infor{
+margin-left: 100px;
+margin-right: 100px;
+
+  }
+
+  p{
+    text-align: justify; /* Justifica el texto */
+            margin: 0 auto; /* Centra el bloque */
+            max-width: 80%;
+            font-size: 15px;
+            font-weight: bold;
+  }
