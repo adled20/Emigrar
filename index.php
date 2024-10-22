@@ -20,8 +20,28 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="./html/Ciudades.php">Ver Ciudades</a>
+      <li class="nav-item dropdown">
+     
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Dropdown
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <form action="./html/Ciudades.php" id="FormPais" method="post">
+          <?php
+           $traerpais=$conexion->query("SELECT Pais, count(*) FROM colombianos_registrados_en_el_exterior_20240927
+        group by Pais");
+          while ($data = $traerpais->fetch_object()) {
+      
+      ?>
+
+        <li><a class="dropdown-item" href="#" type="submit" name='<?=$data->Pais?>' onclick="TomarPais('<?=$data->Pais?>')"><?=$data->Pais?></a></li>
+       
+<?php } ?>
+
+<input type="hidden" name="NombrePais" id="NombrePais">
+
+          </form>
+          </ul>
         </li>
         <li class="nav-item">
           <a class="nav-link active" href="./html/Oficina_Registro.php">Ver oficinas de registro</a>
@@ -41,7 +61,14 @@
 </nav>
 <p><Hola/p>
 </body>
-<script src="./js/Apache_ciudades.js"></script>
+<script>
+  function TomarPais(nombre) {
+
+  document.getElementById('NombrePais').value =nombre;
+  document.getElementById("FormPais").submit();
+    
+  }
+</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 </html>

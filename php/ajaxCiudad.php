@@ -2,7 +2,7 @@
 include "./conexion.php";
 $Pais=$_POST['Pais'];
 
-$sql4=$conexion->query("SELECT 
+$sql1=$conexion->query("SELECT 
     SUBSTRING_INDEX(Ciudad_de_Residencia, '/', 1) AS Ciudad, 
     COUNT(*) AS residentes 
 FROM 
@@ -12,7 +12,7 @@ WHERE
 GROUP BY 
     Ciudad");
 $Ciudad=[];
-while ($data = mysqli_fetch_array($sql4)) {
+while ($data = mysqli_fetch_array($sql1)) {
 
     $Ciudad[]=$data;
    ?>
