@@ -6,8 +6,31 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../css/ciudades.css">
-    <title>Document</title>
+  <link rel="stylesheet" href="../css/index.css">
+  <script
+  src="https://code.jquery.com/jquery-3.7.1.js"
+  integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+  crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css" />
+<script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+<script>
+  $(document).ready( function () {
+    $('#MyTable').DataTable({
+      "language":{
+        "lengthMenu":"Mostrar "+ "<select><option>10</option><option>25</option><option>50</option></select> " +" Registros por página",
+        "zeroRecords":"Nada encontrado - disculpa",
+        "info":"Mostrando la página _PAGE_ de _PAGES_",
+        "infoEmpty":"(Filtrado de _MAX_ registros totales)",
+        "search": "Buscar:",
+        "paginate":{
+          "next":"Siguiente",
+          "previous": "Anterior"
+        }
+      }
+    });
+} );
+</script>
+    <title>Ciudades</title>
 </head>
 <body>
     <?php 
@@ -27,8 +50,28 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="./Ciudades.php">Ver Ciudades</a>
+      <li class="nav-item dropdown">
+     
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Ver ciudades de cada país
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <form action="./Ciudades.php" id="FormPais" method="post">
+          <?php
+           $traerpais=$conexion->query("SELECT Pais, count(*) FROM colombianos_registrados_en_el_exterior_20240927
+        group by Pais");
+          while ($data = $traerpais->fetch_object()) {
+      
+      ?>
+
+        <li><a class="dropdown-item" href="#" type="submit" name='<?=$data->Pais?>' onclick="TomarPais('<?=$data->Pais?>')"><?=$data->Pais?></a></li>
+       
+<?php } ?>
+
+<input type="hidden" name="NombrePais" id="NombrePais">
+
+          </form>
+          </ul>
         </li>
         <li class="nav-item">
           <a class="nav-link active" href="./Oficina_Registro.php">Ver oficinas de registro</a>
@@ -77,7 +120,7 @@ group by Ciudad_de_Residencia");
 <div class="container">
   <div class="row">
     <div class="col">
-    <table class="table">
+    <table id="MyTable" class="table table-striped table-hover">
   <thead>
     <tr>
       <th scope="col">Pais</th>
@@ -194,7 +237,7 @@ option = {
     xAxis: [
         {
             type: 'category',
-            name: 'País',
+            name: 'Ciudades',
             nameLocation: 'middle',
             nameTextStyle: {
                 fontWeight: 'bold',
@@ -238,7 +281,14 @@ if (option && typeof option === 'object') {
 
 window.addEventListener('resize', myChart.resize);
 </script>
+<script>
+  function TomarPais(nombre) {
 
+  document.getElementById('NombrePais').value =nombre;
+  document.getElementById("FormPais").submit();
+    
+  }
+</script>
 
 
 <script src="./js/Apache_ciudades.js"></script>

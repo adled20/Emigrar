@@ -23,7 +23,7 @@
       <li class="nav-item dropdown">
      
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
+          Ver ciudades de cada país
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
           <form action="./html/Ciudades.php" id="FormPais" method="post">
@@ -59,7 +59,7 @@
     </div>
   </div>
 </nav>
-<p><Hola/p>
+
 </body>
 <script>
   function TomarPais(nombre) {
