@@ -52,7 +52,7 @@
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
           <form action="./Ciudades.php" id="FormPais" method="post">
           <?php
-           $traerpais=$conexion->query("SELECT Pais, count(*) FROM colombianos_registrados_en_el_exterior_20240927
+           $traerpais=$conexion->query("SELECT Pais, count(*) FROM colombianos_exterior
         group by Pais");
           while ($data = $traerpais->fetch_object()) {
       
@@ -79,14 +79,17 @@
         <li class="nav-item">
           <a class="nav-link active" href="./Areas_Conocimiento.php" tabindex="-1" aria-disabled="true">Ver areas de conocimiento</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="../php/probabilidad.php" tabindex="-1" >Probabilidades</a>
+        </li>
       </ul>
     </div>
   </div>
 </nav>
 <?php 
-$sql4=$conexion->query("SELECT Pais,count(*) from colombianos_registrados_en_el_exterior_20240927
+$sql4=$conexion->query("SELECT Pais,count(*) from colombianos_exterior
 group by Pais");
-$sql7=$conexion->query("SELECT Ciudad_de_Residencia, count(*) FROM colombianos_registrados_en_el_exterior_20240927
+$sql7=$conexion->query("SELECT Ciudad_de_Residencia, count(*) FROM colombianos_exterior
 where Pais='Venezuela'
 group by Ciudad_de_Residencia");
  $arreglo=array();
@@ -132,7 +135,7 @@ group by Ciudad_de_Residencia");
  
   <tbody>
     <?php 
-   $sql9=$conexion->query("SELECT Pais,count(*) as 'num_reg' from colombianos_registrados_en_el_exterior_20240927
+   $sql9=$conexion->query("SELECT Pais,count(*) as 'num_reg' from colombianos_exterior
 group by Pais");
 $cont=0;
     while ($data = $sql9->fetch_object()) {
@@ -253,7 +256,7 @@ if (option && typeof option === 'object') {
 
 window.addEventListener('resize', myChart.resize);
 </script>
-<script src="./js/Apache_ciudades.js"></script>
+<script src="../js/Apache_ciudades.php"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script>
   function TomarPais(nombre) {

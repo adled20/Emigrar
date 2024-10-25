@@ -51,7 +51,7 @@
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
           <form action="./Ciudades.php" id="FormPais" method="post">
           <?php
-           $traerpais=$conexion->query("SELECT Pais, count(*) FROM colombianos_registrados_en_el_exterior_20240927
+           $traerpais=$conexion->query("SELECT Pais, count(*) FROM colombianos_exterior
         group by Pais");
           while ($data = $traerpais->fetch_object()) {
       
@@ -78,14 +78,17 @@
         <li class="nav-item">
           <a class="nav-link active" href="./Areas_Conocimiento.php" tabindex="-1" aria-disabled="true">Ver areas de conocimiento</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="../php/probabilidad.php" tabindex="-1" >Probabilidades</a>
+        </li>
       </ul>
     </div>
   </div>
 </nav>
 <?php 
-$sql4=$conexion->query("SELECT Edad, COUNT(*) as colombos FROM `colombianos_registrados_en_el_exterior_20240927`
+$sql4=$conexion->query("SELECT Edad, COUNT(*) as colombos FROM `colombianos_exterior`
 GROUP by Edad
-ORDER BY colombos DESC;");
+ORDER BY Edad ;");
 
  $arreglo=array();
         
@@ -123,9 +126,9 @@ ORDER BY colombos DESC;");
  
   <tbody>
     <?php 
-   $sql9=$conexion->query("SELECT Pais,Edad, COUNT(*) as colombos FROM `colombianos_registrados_en_el_exterior_20240927`
+   $sql9=$conexion->query("SELECT Pais,Edad, COUNT(*) as colombos FROM `colombianos_exterior`
 GROUP by Pais,Edad
-ORDER BY colombos DESC;");
+ORDER BY Edad ;");
     while ($data = $sql9->fetch_object()) {
       
         ?>
@@ -200,7 +203,7 @@ option = {
     xAxis: [
         {
             type: 'category',
-            name: 'Areas de Conocimiento',
+            name: 'Edades',
             nameLocation: 'middle',
             nameTextStyle: {
                 fontWeight: 'bold',

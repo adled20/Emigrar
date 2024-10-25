@@ -58,7 +58,7 @@
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
           <form action="./Ciudades.php" id="FormPais" method="post">
           <?php
-           $traerpais=$conexion->query("SELECT Pais, count(*) FROM colombianos_registrados_en_el_exterior_20240927
+           $traerpais=$conexion->query("SELECT Pais, count(*) FROM colombianos_exterior
         group by Pais");
           while ($data = $traerpais->fetch_object()) {
       
@@ -85,13 +85,16 @@
         <li class="nav-item">
           <a class="nav-link active" href="./Areas_Conocimiento.php" tabindex="-1" aria-disabled="true">Ver areas de conocimiento</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="../php/probabilidad.php" tabindex="-1" >Probabilidades</a>
+        </li>
       </ul>
     </div>
   </div>
 </nav>
 <?php 
 
-$sql7=$conexion->query("SELECT Ciudad_de_Residencia, count(*) FROM colombianos_registrados_en_el_exterior_20240927
+$sql7=$conexion->query("SELECT Ciudad_de_Residencia, count(*) FROM colombianos_exterior
 where Pais='Venezuela'
 group by Ciudad_de_Residencia");
  $arreglo2=array();
@@ -123,7 +126,7 @@ group by Ciudad_de_Residencia");
     <table id="MyTable" class="table table-striped table-hover">
   <thead>
     <tr>
-      <th scope="col">Pais</th>
+      <th scope="col">Ciudad</th>
       <th scope="col">Colombianos registrados</th>
     
     </tr>
@@ -135,7 +138,7 @@ group by Ciudad_de_Residencia");
     SUBSTRING_INDEX(Ciudad_de_Residencia, '/', 1) AS Ciudad, 
     COUNT(*) AS residentes 
 FROM 
-    colombianos_registrados_en_el_exterior_20240927
+    colombianos_exterior
 WHERE 
     Pais = '$Ciudad'
 GROUP BY 
@@ -165,7 +168,7 @@ $sql1=$conexion->query("SELECT
     SUBSTRING_INDEX(Ciudad_de_Residencia, '/', 1) AS Ciudad, 
     COUNT(*) AS residentes 
 FROM 
-    colombianos_registrados_en_el_exterior_20240927
+    colombianos_exterior
 WHERE 
     Pais = '$Ciudad'
 GROUP BY 

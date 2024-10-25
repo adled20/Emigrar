@@ -6,7 +6,7 @@ $sql1=$conexion->query("SELECT
     SUBSTRING_INDEX(Ciudad_de_Residencia, '/', 1) AS Ciudad, 
     COUNT(*) AS residentes 
 FROM 
-    colombianos_registrados_en_el_exterior_20240927
+    colombianos_exterior
 WHERE 
     Pais = '$Pais'
 GROUP BY 

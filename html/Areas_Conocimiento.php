@@ -52,7 +52,7 @@
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
           <form action="./Ciudades.php" id="FormPais" method="post">
           <?php
-           $traerpais=$conexion->query("SELECT Pais, count(*) FROM colombianos_registrados_en_el_exterior_20240927
+           $traerpais=$conexion->query("SELECT Pais, count(*) FROM colombianos_exterior
         group by Pais");
           while ($data = $traerpais->fetch_object()) {
       
@@ -79,12 +79,15 @@
         <li class="nav-item">
           <a class="nav-link active" href="./Areas_Conocimiento.php" tabindex="-1" aria-disabled="true">Ver areas de conocimiento</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="../php/probabilidad.php" tabindex="-1" >Probabilidades</a>
+        </li>
       </ul>
     </div>
   </div>
 </nav>
 <?php 
-$sql4=$conexion->query("SELECT Area_Conocimiento as Area, COUNT(*) as Total FROM `colombianos_registrados_en_el_exterior_20240927`
+$sql4=$conexion->query("SELECT Area_Conocimiento as Area, COUNT(*) as Total FROM `colombianos_exterior`
 GROUP by Area_Conocimiento;");
 
  $arreglo=array();
@@ -123,7 +126,7 @@ GROUP by Area_Conocimiento;");
  
   <tbody>
     <?php 
-   $sql9=$conexion->query("SELECT Pais,Area_Conocimiento as Area, COUNT(*) as colombos FROM `colombianos_registrados_en_el_exterior_20240927`
+   $sql9=$conexion->query("SELECT Pais,Area_Conocimiento as Area, COUNT(*) as colombos FROM `colombianos_exterior`
 GROUP by Pais,Area_Conocimiento order by colombos desc;");
     while ($data = $sql9->fetch_object()) {
       
